@@ -18,10 +18,21 @@
     using Microsoft.Extensions.Logging;
     using Microsoft.Extensions.PlatformAbstractions;
 
+    using Serilog;
+    using Serilog.Sinks.RollingFile;
+
     public class Startup
     {
         public Startup(IHostingEnvironment env)
         {
+            string applicationPath = PlatformServices.Default.Application.ApplicationBasePath;
+
+            // Create SeriLog
+            Log.Logger = new LoggerConfiguration()
+                                .MinimumLevel.Debug()
+                                .WriteTo.RollingFile(Path.Combine(applicationPath, "log_{Date}.txt"))
+                                .CreateLogger();
+
             // Set up configuration sources.
             var builder = new ConfigurationBuilder()
                 .AddJsonFile("appsettings.json")
@@ -34,15 +45,12 @@
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            var cert = new X509Certificate2(Path.Combine(PlatformServices.Default.Application.ApplicationBasePath, "idsrv4test.pfx"), "idsrv3test");
+            //var cert = new X509Certificate2(Path.Combine(PlatformServices.Default.Application.ApplicationBasePath, "idsrv4test.pfx"), "idsrv3test");
 
             var builder = services.AddIdentityServer(options =>
             {
-                options.SigningCertificate = cert;
+                //options.SigningCertificate = cert;
             });
-
-            var x = Clients.Get();
-            var y = Scopes.Get();
 
             builder.AddInMemoryClients(Clients.Get());
             builder.AddInMemoryScopes(Scopes.Get());
@@ -60,6 +68,7 @@
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
+            loggerFactory.AddSerilog();
 
             app.UseIISPlatformHandler();
 
