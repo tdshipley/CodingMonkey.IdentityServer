@@ -1,5 +1,5 @@
 # CodingMonkey.IdentityServer
-An instance of IdentityServer4 for CodingMonkey
+An instance of [IdentityServer4](https://github.com/IdentityServer/IdentityServer4) for CodingMonkey
 
 ## Required Secrets File
 
