@@ -1,16 +1,17 @@
 ﻿namespace CodingMonkey.IdentityServer.Models
 {
     using System.Collections.Generic;
+    using System.IO;
 
     using IdentityServer4.Core.Models;
 
     static class Scopes
     {
-        public static List<Scope> Get()
+        public static List<Scope> Get(string secretsPath)
         {
             const string ScopeSecretsFileName = "scope.secrets.json";
-
-            var scopes = Utility.GetListFromConfig<Scope>(ScopeSecretsFileName);
+            string scopeSecretsPath = Path.Combine(secretsPath, ScopeSecretsFileName);
+            var scopes = new Utility().GetListFromConfig<Scope>(scopeSecretsPath);
 
             // Client secrets must be hashed as Sha256
             // https://github.com/IdentityServer/IdentityServer3/issues/741
