@@ -1,15 +1,17 @@
 ﻿namespace CodingMonkey.IdentityServer.Models
 {
     using System.Collections.Generic;
+    using System.IO;
 
     using IdentityServer4.Core.Models;
 
     static class Clients
     {
-        public static List<Client> Get()
+        public static List<Client> Get(string secretsPath)
         {
             const string ClientSecretsFileName = "client.secrets.json";
-            var clients = Utility.GetListFromConfig<Client>(ClientSecretsFileName);
+            string clientSecretsPath = Path.Combine(secretsPath, ClientSecretsFileName);
+            var clients = new Utility().GetListFromConfig<Client>(clientSecretsPath);
 
             // Client secrets must be hashed as Sha256
             // https://github.com/IdentityServer/IdentityServer3/issues/741

@@ -4,28 +4,29 @@
     using System.IO;
     using System.Security.Cryptography.X509Certificates;
 
-    using CodingMonkey.IdentityServer.Extensions;
     using CodingMonkey.IdentityServer.Models;
 
     using IdentityServer4.Core.Services;
     using IdentityServer4.Core.Services.InMemory;
     using IdentityServer4.Core.Validation;
 
-    using Microsoft.AspNet.Builder;
-    using Microsoft.AspNet.Hosting;
+    using Microsoft.AspNetCore.Builder;
+    using Microsoft.AspNetCore.Hosting;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Logging;
-    using Microsoft.Extensions.PlatformAbstractions;
 
     using Serilog;
     using Serilog.Sinks.RollingFile;
 
     public class Startup
     {
+        private IHostingEnvironment env;
+
         public Startup(IHostingEnvironment env)
         {
-            string applicationPath = PlatformServices.Default.Application.ApplicationBasePath;
+            this.env = env;
+            string applicationPath = env.ContentRootPath;
 
             // Create SeriLog
             Log.Logger = new LoggerConfiguration()
@@ -35,8 +36,10 @@
 
             // Set up configuration sources.
             var builder = new ConfigurationBuilder()
+                .SetBasePath(applicationPath)
                 .AddJsonFile("appsettings.json")
                 .AddEnvironmentVariables();
+
             Configuration = builder.Build();
         }
 
@@ -52,8 +55,8 @@
                 //options.SigningCertificate = cert;
             });
 
-            builder.AddInMemoryClients(Clients.Get());
-            builder.AddInMemoryScopes(Scopes.Get());
+            builder.AddInMemoryClients(Clients.Get(this.env.ContentRootPath));
+            builder.AddInMemoryScopes(Scopes.Get(this.env.ContentRootPath));
             builder.AddInMemoryUsers(new List<InMemoryUser>());
 
             // Add framework services.
@@ -70,16 +73,11 @@
             loggerFactory.AddDebug();
             loggerFactory.AddSerilog();
 
-            app.UseIISPlatformHandler();
-
             app.UseIdentityServer();
 
             app.UseStaticFiles();
 
             app.UseMvc();
         }
-
-        // Entry point for the application.
-        public static void Main(string[] args) => WebApplication.Run<Startup>(args);
     }
 }
