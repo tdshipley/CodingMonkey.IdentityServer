@@ -57,13 +57,14 @@
 
             builder.AddInMemoryClients(Clients.Get(this.env.ContentRootPath));
             builder.AddInMemoryScopes(Scopes.Get(this.env.ContentRootPath));
+            builder.AddInMemoryStores();
             builder.AddInMemoryUsers(new List<InMemoryUser>());
 
             // Add framework services.
             services.AddMvc();
 
             builder.Services.AddTransient<IProfileService, InMemoryUserProfileService>();
-            builder.Services.AddTransient<IResourceOwnerPasswordValidator, ResouceOwnerPasswordValidator>();
+            builder.Services.AddTransient<IResourceOwnerPasswordValidator, IdentityResourceOwnerPasswordValidator<InMemoryUser>>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
