@@ -3,7 +3,7 @@
     using System.Collections.Generic;
     using System.IO;
 
-    using IdentityServer4.Core.Models;
+    using IdentityServer4.Models;
 
     static class Clients
     {

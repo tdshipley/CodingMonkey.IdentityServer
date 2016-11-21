@@ -6,9 +6,9 @@
 
     using CodingMonkey.IdentityServer.Models;
 
-    using IdentityServer4.Core.Services;
-    using IdentityServer4.Core.Services.InMemory;
-    using IdentityServer4.Core.Validation;
+    using IdentityServer4.Services;
+    using IdentityServer4.Services.InMemory;
+    using IdentityServer4.Validation;
 
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
@@ -62,8 +62,8 @@
             // Add framework services.
             services.AddMvc();
 
-            builder.Services.AddTransient<IProfileService, InMemoryProfileService>();
-            builder.Services.AddTransient<IResourceOwnerPasswordValidator, DefaultResouceOwnerPasswordValidator>();
+            builder.Services.AddTransient<IProfileService, InMemoryUserProfileService>();
+            builder.Services.AddTransient<IResourceOwnerPasswordValidator, ResouceOwnerPasswordValidator>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
