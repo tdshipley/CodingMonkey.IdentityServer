@@ -16,24 +16,6 @@ The first is called ```client.secrets.json``` in ```src\CodingMonkey.IdentitySer
     "ClientId": "client_id",
     "Enabled": true,
     "AccessTokenType": 1, // This is a enum in IdentityServer4 - refers to the type of token to give to client on auth request
-    "Flow": 3, // This is a enum in IdentityServer4 - in this case "ClientCredentialFlow" refers to how credentials are handled
-    "ClientSecrets": [
-      {
-        "Value": "shared_secret_for_client"
-      }
-    ],
-    "AllowedScopes": [
-      "list_of_scope_ids_client_can_access"
-    ]
-  }
-]
-
-[
-  {
-    "ClientName": "name_of_client",
-    "ClientId": "client_id",
-    "Enabled": true,
-    "AccessTokenType": 1, // This is a enum in IdentityServer4 - refers to the type of token to give to client on auth request
     "ClientSecrets": [
       {
         "Value": "shared_secret_for_client"
