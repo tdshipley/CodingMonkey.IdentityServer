@@ -27,6 +27,26 @@ The first is called ```client.secrets.json``` in ```src\CodingMonkey.IdentitySer
     ]
   }
 ]
+
+[
+  {
+    "ClientName": "name_of_client",
+    "ClientId": "client_id",
+    "Enabled": true,
+    "AccessTokenType": 1, // This is a enum in IdentityServer4 - refers to the type of token to give to client on auth request
+    "ClientSecrets": [
+      {
+        "Value": "shared_secret_for_client"
+      }
+    ],
+    "AllowedScopes": [
+      "list_of_scope_ids_client_can_access"
+    ],
+    "AllowedGrantTypes": [
+      "client_credentials"
+    ]
+  }
+]
 ```
 
 ### scope.secrets.json
