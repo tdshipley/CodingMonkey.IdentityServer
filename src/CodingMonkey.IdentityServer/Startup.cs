@@ -28,12 +28,6 @@
             this.env = env;
             string applicationPath = env.ContentRootPath;
 
-            // Create SeriLog
-            Log.Logger = new LoggerConfiguration()
-                                .MinimumLevel.Debug()
-                                .WriteTo.RollingFile(Path.Combine(applicationPath, "log_{Date}.txt"))
-                                .CreateLogger();
-
             // Set up configuration sources.
             var builder = new ConfigurationBuilder()
                 .SetBasePath(applicationPath)
@@ -41,6 +35,15 @@
                 .AddEnvironmentVariables();
 
             Configuration = builder.Build();
+
+            if (env.IsDevelopment() || env.IsStaging())
+            {
+                // Create SeriLog
+                Log.Logger = new LoggerConfiguration()
+                                    .MinimumLevel.Debug()
+                                    .WriteTo.RollingFile(Path.Combine(applicationPath, "log_{Date}.txt"))
+                                    .CreateLogger();
+            }
         }
 
         public IConfigurationRoot Configuration { get; set; }
