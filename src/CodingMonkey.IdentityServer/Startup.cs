@@ -60,7 +60,15 @@ namespace CodingMonkey.IdentityServer
             builder.AddInMemoryClients(Clients.Get(this.env.ContentRootPath));
             builder.AddInMemoryScopes(Scopes.Get(this.env.ContentRootPath));
             builder.AddInMemoryStores();
-            builder.SetSigningCredential(this.LoadIdentityServerSignCert());
+            var cert = this.LoadIdentityServerSignCert();
+            if (cert != null)
+            {
+                builder.SetSigningCredential(cert);
+            }
+            else
+            {
+                builder.SetTemporarySigningCredential();
+            }
 
             // Add framework services.
             // Change JSON serialisation to use property names!
@@ -118,8 +126,7 @@ namespace CodingMonkey.IdentityServer
             }
             catch (Exception e)
             {
-                Console.WriteLine("Error getting to cert");
-                Console.WriteLine(e);
+                Log.Logger.Fatal(e, "There was an error creating the cert");
                 return null;
             }
 
