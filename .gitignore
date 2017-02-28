@@ -1,4 +1,5 @@
 ## User Added Files
+appsettings.secrets.json
 client.secrets.json
 scope.secrets.json
 log_*.txt
