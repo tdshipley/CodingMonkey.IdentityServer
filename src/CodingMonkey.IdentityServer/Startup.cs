@@ -126,8 +126,10 @@ namespace CodingMonkey.IdentityServer
             }
             catch (Exception e)
             {
-                Log.Logger.Fatal(e, "There was an error creating the cert");
-                return null;
+                Log.Logger.Error(e, "There was an error creating the cert. Did you set the WEBSITE_LOAD_CERTIFICATES app setting?");
+                throw new FileNotFoundException(
+                    "The certificate was not loaded in the personal cert store. Did you set the WEBSITE_LOAD_CERTIFICATES app setting?",
+                    e);
             }
 
             if (certCollection.Count > 0)
