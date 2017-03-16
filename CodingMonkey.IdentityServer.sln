@@ -1,17 +1,16 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.24720.0
+# Visual Studio 15
+VisualStudioVersion = 15.0.26228.9
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{46F0A455-4E7E-4901-B6FA-C4CD2C710CAA}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{7A4E8A13-A477-40EB-B2D6-BE77D64A1533}"
 	ProjectSection(SolutionItems) = preProject
 		.gitignore = .gitignore
-		global.json = global.json
 	EndProjectSection
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "CodingMonkey.IdentityServer", "src\CodingMonkey.IdentityServer\CodingMonkey.IdentityServer.xproj", "{C0046CA8-A728-48CF-AA3C-71F272394BAF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CodingMonkey.IdentityServer", "src\CodingMonkey.IdentityServer\CodingMonkey.IdentityServer.csproj", "{C0046CA8-A728-48CF-AA3C-71F272394BAF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
