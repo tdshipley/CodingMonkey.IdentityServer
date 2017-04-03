@@ -1,16 +1,11 @@
-﻿using System;
-
-namespace CodingMonkey.IdentityServer
+﻿namespace CodingMonkey.IdentityServer
 {
-    using System.Collections.Generic;
+    using System;
     using System.IO;
     using System.Security.Cryptography.X509Certificates;
 
     using CodingMonkey.IdentityServer.Models;
 
-    using IdentityServer4.Services;
-    using IdentityServer4.Services.InMemory;
-    using IdentityServer4.Validation;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.Extensions.Configuration;
@@ -18,7 +13,6 @@ namespace CodingMonkey.IdentityServer
     using Microsoft.Extensions.Logging;
 
     using Serilog;
-    using Serilog.Sinks.RollingFile;
     using Newtonsoft.Json.Serialization;
 
     public class Startup
@@ -30,12 +24,6 @@ namespace CodingMonkey.IdentityServer
             this.env = env;
             string applicationPath = env.ContentRootPath;
 
-            // Create SeriLog
-            Log.Logger = new LoggerConfiguration()
-                                .MinimumLevel.Debug()
-                                .WriteTo.RollingFile(Path.Combine(applicationPath, "log_{Date}.txt"))
-                                .CreateLogger();
-
             // Set up configuration sources.
             var builder = new ConfigurationBuilder()
                 .SetBasePath(applicationPath)
@@ -44,6 +32,21 @@ namespace CodingMonkey.IdentityServer
                 .AddEnvironmentVariables();
 
             Configuration = builder.Build();
+
+            if (env.IsDevelopment() || env.IsStaging())
+            {
+                // Create SeriLog
+                Log.Logger = new LoggerConfiguration()
+                                    .MinimumLevel.Debug()
+                                    .WriteTo.RollingFile(Path.Combine(applicationPath, "log_{Date}.txt"))
+                                    .CreateLogger();
+            }
+            else
+            {
+                Log.Logger = new LoggerConfiguration()
+                                    .WriteTo.ApplicationInsightsEvents(Configuration["ApplicationInsights:InstrumentationKey"])
+                                    .CreateLogger();
+            }
         }
 
         public IConfigurationRoot Configuration { get; set; }
