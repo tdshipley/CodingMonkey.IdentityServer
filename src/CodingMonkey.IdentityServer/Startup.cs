@@ -54,6 +54,8 @@
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddApplicationInsightsTelemetry(Configuration);
+
             //IServ4 Docs: https://github.com/IdentityServer/IdentityServer4/tree/dev/docs
             //TODO: Add certficate for HTTPS!
             var builder = services.AddIdentityServer(options =>
