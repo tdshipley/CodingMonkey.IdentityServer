@@ -56,16 +56,15 @@
             });
             
             builder.AddInMemoryClients(Clients.Get(this.env.ContentRootPath));
-            builder.AddInMemoryScopes(Scopes.Get(this.env.ContentRootPath));
-            builder.AddInMemoryStores();
+            builder.AddInMemoryApiResources(ApiResources.Get(this.env.ContentRootPath));
             var cert = this.LoadIdentityServerSignCert();
             if (cert != null)
             {
-                builder.SetSigningCredential(cert);
+                builder.AddSigningCredential(cert);
             }
             else
             {
-                builder.SetTemporarySigningCredential();
+                builder.AddDeveloperSigningCredential();
             }
 
             // Add framework services.
