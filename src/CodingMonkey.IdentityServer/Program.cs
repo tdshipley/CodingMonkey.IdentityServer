@@ -1,21 +1,25 @@
 ﻿namespace CodingMonkey.IdentityServer
 {
+    using Microsoft.AspNetCore;
     using Microsoft.AspNetCore.Hosting;
-    using System.IO;
+    using Microsoft.Extensions.Configuration;
 
     public class Program
     {
         // Entry point for the application.
         public static void Main(string[] args)
         {
-            var host = new WebHostBuilder()
-                .UseKestrel()
-                .UseContentRoot(Directory.GetCurrentDirectory())
-                .UseIISIntegration()
-                .UseStartup<Startup>()
-                .Build();
-
-            host.Run();
+            BuildWebHost(args).Run();
         }
+
+        public static IWebHost BuildWebHost(string[] args) =>
+            WebHost.CreateDefaultBuilder(args)
+                .UseStartup<Startup>()
+                .ConfigureAppConfiguration((hostContext, config) =>
+                {
+                    config.AddJsonFile("scope.secrets.json", optional: false);
+                    config.AddJsonFile("client.secrets.json", optional: false);
+                })
+                .Build();
     }
 }

@@ -18,20 +18,15 @@
     public class Startup
     {
         private IHostingEnvironment env;
+        public IConfiguration Configuration { get; set; }
 
-        public Startup(IHostingEnvironment env)
+        public Startup(IConfiguration configuration, IHostingEnvironment env)
         {
             this.env = env;
             string applicationPath = env.ContentRootPath;
 
             // Set up configuration sources.
-            var builder = new ConfigurationBuilder()
-                .SetBasePath(applicationPath)
-                .AddJsonFile("appsettings.json")
-                .AddJsonFile("appsettings.secrets.json", optional: false)
-                .AddEnvironmentVariables();
-
-            Configuration = builder.Build();
+            Configuration = configuration;
 
             if (env.IsDevelopment() || env.IsStaging())
             {
@@ -48,8 +43,6 @@
                                     .CreateLogger();
             }
         }
-
-        public IConfigurationRoot Configuration { get; set; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
