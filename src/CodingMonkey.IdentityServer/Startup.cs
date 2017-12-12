@@ -102,9 +102,7 @@
         {
             if (env.IsDevelopment())
             {
-                string identityServerCertPassword = Configuration["IdentityServer:Password"];
-                string identityServerCertFileName = Configuration["IdentityServer:SignCert:Filename"];
-                return new X509Certificate2(Path.Combine(this.env.ContentRootPath, identityServerCertFileName), identityServerCertPassword);
+                return null;
             }
 
             string identityServerCertAzureThumbprint = Configuration["IdentityServer:SignCert:AzureThumbprint"];

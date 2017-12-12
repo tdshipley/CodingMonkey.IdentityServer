@@ -1,27 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace CodingMonkey.IdentityServer.Models
+﻿namespace CodingMonkey.IdentityServer.Models
 {
     using System.IO;
-
-    using Microsoft.AspNetCore.Hosting;
-    using Microsoft.AspNetCore.Hosting.Internal;
-    using Microsoft.Extensions.PlatformAbstractions;
-
+    using System;
+    using System.Collections.Generic;
     using Newtonsoft.Json;
 
     internal class Utility
     {
-        private readonly IHostingEnvironment hostingEnvironment;
-
-        public Utility()
-        {
-            this.hostingEnvironment = new HostingEnvironment();
-        }
-
         internal List<T> GetListFromConfig<T>(string filePath)
         {
             string jsonContent;

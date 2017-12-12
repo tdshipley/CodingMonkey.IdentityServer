@@ -2,7 +2,6 @@
 {
     using Microsoft.AspNetCore;
     using Microsoft.AspNetCore.Hosting;
-    using Microsoft.Extensions.Configuration;
 
     public class Program
     {
@@ -15,11 +14,6 @@
         public static IWebHost BuildWebHost(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
                 .UseStartup<Startup>()
-                .ConfigureAppConfiguration((hostContext, config) =>
-                {
-                    config.AddJsonFile("apiresource.secrets.json", optional: false);
-                    config.AddJsonFile("client.secrets.json", optional: false);
-                })
                 .Build();
     }
 }
