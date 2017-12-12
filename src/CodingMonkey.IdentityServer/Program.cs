@@ -17,7 +17,7 @@
                 .UseStartup<Startup>()
                 .ConfigureAppConfiguration((hostContext, config) =>
                 {
-                    config.AddJsonFile("scope.secrets.json", optional: false);
+                    config.AddJsonFile("apiresource.secrets.json", optional: false);
                     config.AddJsonFile("client.secrets.json", optional: false);
                 })
                 .Build();
