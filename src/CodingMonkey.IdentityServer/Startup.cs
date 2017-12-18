@@ -100,7 +100,7 @@
 
         private X509Certificate2 LoadIdentityServerSignCert()
         {
-            if (env.IsDevelopment())
+            if (this.env.IsDevelopment())
             {
                 return null;
             }
@@ -122,9 +122,7 @@
             catch (Exception e)
             {
                 Log.Logger.Error(e, "There was an error creating the cert. Did you set the WEBSITE_LOAD_CERTIFICATES app setting?");
-                throw new FileNotFoundException(
-                    "The certificate was not loaded in the personal cert store. Did you set the WEBSITE_LOAD_CERTIFICATES app setting?",
-                    e);
+				return null;
             }
 
             if (certCollection.Count > 0)
