@@ -8,12 +8,13 @@
     }
   },
 	"profiles": {
-		"Kestral": {
-			"commandName": "IISExpress",
+		"Development": {
+			"commandName": "Project",
 			"launchBrowser": true,
 			"launchUrl": "api/healthcheck",
 			"environmentVariables": {
-				"ASPNETCORE_ENVIRONMENT": "Development"
+				"ASPNETCORE_ENVIRONMENT": "Development",
+				"ASPNETCORE_URLS": "http://localhost:55497/"
 			}
 		}
 	}
