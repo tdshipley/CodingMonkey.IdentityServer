@@ -18,20 +18,15 @@
     public class Startup
     {
         private IHostingEnvironment env;
+        public IConfiguration Configuration { get; set; }
 
-        public Startup(IHostingEnvironment env)
+        public Startup(IConfiguration configuration, IHostingEnvironment env)
         {
             this.env = env;
             string applicationPath = env.ContentRootPath;
 
             // Set up configuration sources.
-            var builder = new ConfigurationBuilder()
-                .SetBasePath(applicationPath)
-                .AddJsonFile("appsettings.json")
-                .AddJsonFile("appsettings.secrets.json", optional: false)
-                .AddEnvironmentVariables();
-
-            Configuration = builder.Build();
+            Configuration = configuration;
 
             if (env.IsDevelopment() || env.IsStaging())
             {
@@ -49,8 +44,6 @@
             }
         }
 
-        public IConfigurationRoot Configuration { get; set; }
-
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
@@ -63,16 +56,15 @@
             });
             
             builder.AddInMemoryClients(Clients.Get(this.env.ContentRootPath));
-            builder.AddInMemoryScopes(Scopes.Get(this.env.ContentRootPath));
-            builder.AddInMemoryStores();
+            builder.AddInMemoryApiResources(ApiResources.Get(this.env.ContentRootPath));
             var cert = this.LoadIdentityServerSignCert();
             if (cert != null)
             {
-                builder.SetSigningCredential(cert);
+                builder.AddSigningCredential(cert);
             }
             else
             {
-                builder.SetTemporarySigningCredential();
+                builder.AddDeveloperSigningCredential();
             }
 
             // Add framework services.
@@ -108,11 +100,9 @@
 
         private X509Certificate2 LoadIdentityServerSignCert()
         {
-            if (env.IsDevelopment())
+            if (this.env.IsDevelopment())
             {
-                string identityServerCertPassword = Configuration["IdentityServer:Password"];
-                string identityServerCertFileName = Configuration["IdentityServer:SignCert:Filename"];
-                return new X509Certificate2(Path.Combine(this.env.ContentRootPath, identityServerCertFileName), identityServerCertPassword);
+                return null;
             }
 
             string identityServerCertAzureThumbprint = Configuration["IdentityServer:SignCert:AzureThumbprint"];
@@ -132,9 +122,7 @@
             catch (Exception e)
             {
                 Log.Logger.Error(e, "There was an error creating the cert. Did you set the WEBSITE_LOAD_CERTIFICATES app setting?");
-                throw new FileNotFoundException(
-                    "The certificate was not loaded in the personal cert store. Did you set the WEBSITE_LOAD_CERTIFICATES app setting?",
-                    e);
+				return null;
             }
 
             if (certCollection.Count > 0)
