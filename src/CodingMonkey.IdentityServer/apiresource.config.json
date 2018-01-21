@@ -1,10 +1,10 @@
 ﻿[
   {
-    "Name": "CodingMonkey.CodeExecutor",
+    "Name": "codingmonkey-codeexecutor",
     "Scopes": [
       {
-        "Name": "CodingMonkey.CodeExecutor",
-        "DisplayName": "CodingMonkey.CodeExecutor"
+        "Name": "codingmonkey-codeexecutor",
+        "DisplayName": "codingmonkey-codeexecutor"
       }
     ]
   }
