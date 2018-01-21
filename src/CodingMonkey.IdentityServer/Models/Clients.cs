@@ -23,11 +23,12 @@
             {
                 try
                 {
-                    var secret_environment_var_name = $"{client.ClientName}_client_secret";
+                    var secret_environment_var_name = $"{client.ClientName.ToUpper()}_CLIENT_SECRET";
                     var secret = configuration[secret_environment_var_name];
 
                     if(secret == null)
                     {
+
                         throw new Exception($"The secret for the Client is null. Env Var Name: {secret_environment_var_name}");
                     }
 

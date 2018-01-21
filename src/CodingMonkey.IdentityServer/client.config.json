@@ -1,7 +1,7 @@
 [
   {
-    "ClientName": "codingmonkey-app",
-    "ClientId": "codingmonkey-app",
+    "ClientName": "codingmonkey-website",
+    "ClientId": "codingmonkey-website",
     "Enabled": true,
     "AccessTokenType": 1,
     "AllowedScopes": [
