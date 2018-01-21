@@ -21,7 +21,7 @@
             {
                 try
                 {
-                    var secret_environment_var_name = $"{api.Name.ToUpper()}_API_SECRET";
+                    var secret_environment_var_name = $"{api.Name.ToUpper()}-API-SECRET";
                     var secret = configuration[secret_environment_var_name];
 
                     if(secret == null)
