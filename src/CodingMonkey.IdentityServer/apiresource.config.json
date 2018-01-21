@@ -1,11 +1,6 @@
 ﻿[
   {
     "Name": "CodingMonkey.CodeExecutor",
-    "ApiSecrets": [
-      {
-        "Value": "E40F9FC9-C174-4BB9-8E8D-2B3AF5B1183D"
-      }
-    ],
     "Scopes": [
       {
         "Name": "CodingMonkey.CodeExecutor",

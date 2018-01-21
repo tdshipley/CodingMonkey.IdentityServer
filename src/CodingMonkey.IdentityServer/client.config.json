@@ -1,0 +1,14 @@
+[
+  {
+    "ClientName": "CodingMonkey.App",
+    "ClientId": "codingmonkey.app",
+    "Enabled": true,
+    "AccessTokenType": 1,
+    "AllowedScopes": [
+      "CodingMonkey.CodeExecutor"
+    ],
+    "AllowedGrantTypes": [
+      "client_credentials"
+    ]
+  }
+]
