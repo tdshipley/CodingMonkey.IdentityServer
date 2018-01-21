@@ -28,7 +28,7 @@
 
                     if(secret == null)
                     {
-                        throw new Exception("The secret for the Client is null");
+                        throw new Exception($"The secret for the Client is null. Env Var Name: {secret_environment_var_name}");
                     }
 
                     client.ClientSecrets.Add(new Secret{

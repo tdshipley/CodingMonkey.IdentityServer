@@ -26,7 +26,7 @@
 
                     if(secret == null)
                     {
-                        throw new Exception("The secret for the API is null");
+                        throw new Exception($"The secret for the API is null. Env Var Name: {secret_environment_var_name}");
                     }
 
                     api.ApiSecrets.Add(new Secret{
