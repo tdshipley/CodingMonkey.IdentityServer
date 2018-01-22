@@ -1,10 +1,10 @@
 ﻿[
   {
-    "Name": "codingmonkey_codeexecutor",
+    "Name": "codingmonkey_code_executor",
     "Scopes": [
       {
-        "Name": "codingmonkey_codeexecutor",
-        "DisplayName": "codingmonkey_codeexecutor"
+        "Name": "codingmonkey_code_executor",
+        "DisplayName": "codingmonkey_code_executor"
       }
     ]
   }
