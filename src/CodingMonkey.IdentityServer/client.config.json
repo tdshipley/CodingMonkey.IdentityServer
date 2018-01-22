@@ -1,11 +1,11 @@
 [
   {
-    "ClientName": "codingmonkey-website",
-    "ClientId": "codingmonkey-website",
+    "ClientName": "codingmonkey_website",
+    "ClientId": "codingmonkey_website",
     "Enabled": true,
     "AccessTokenType": 1,
     "AllowedScopes": [
-      "codingmonkey-codeexecutor"
+      "codingmonkey_codeexecutor"
     ],
     "AllowedGrantTypes": [
       "client_credentials"

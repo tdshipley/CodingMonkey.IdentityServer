@@ -23,7 +23,7 @@
             {
                 try
                 {
-                    var secret_environment_var_name = $"{client.ClientName.ToUpper()}-CLIENT-SECRET";
+                    var secret_environment_var_name = $"{client.ClientName.ToUpper()}_CLIENT_SECRET";
                     //var secret = configuration[secret_environment_var_name];
                     var secret = System.Environment.GetEnvironmentVariable(secret_environment_var_name);
 
