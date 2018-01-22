@@ -24,19 +24,10 @@
                 try
                 {
                     var secret_environment_var_name = $"{client.ClientName.ToUpper()}_CLIENT_SECRET";
-                    //var secret = configuration[secret_environment_var_name];
-                    var secret = System.Environment.GetEnvironmentVariable(secret_environment_var_name);
+                    var secret = configuration[secret_environment_var_name];
 
                     if(secret == null)
                     {
-                        string allEnvVars = string.Empty;
-                        foreach (System.Collections.DictionaryEntry env in Environment.GetEnvironmentVariables())
-                        {
-                            string name = (string)env.Key;
-                            string value = (string)env.Value;
-                            allEnvVars += (System.Environment.NewLine + "{0}={1}", name, value);
-                        }
-
                         throw new Exception($"The secret for the Client is null. Env Var Name: {secret_environment_var_name}, All env vars: {System.Environment.NewLine + allEnvVars}");
                     }
 
