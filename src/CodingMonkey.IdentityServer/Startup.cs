@@ -53,6 +53,8 @@
             
             builder.AddInMemoryClients(Clients.Get(this.env.ContentRootPath, this.Configuration));
             builder.AddInMemoryApiResources(ApiResources.Get(this.env.ContentRootPath, this.Configuration));
+            builder.AddInMemoryIdentityResources(GetIdentityResources.Get());
+
             var cert = this.LoadIdentityServerSignCert();
             if (cert != null)
             {
