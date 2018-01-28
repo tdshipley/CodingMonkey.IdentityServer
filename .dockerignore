@@ -1,0 +1,4 @@
+ # Sample contents of .dockerignore file
+ artifacts/
+ src/CodingMonkey.IdentityServer/bin
+ src/CodingMonkey.IdentityServer/obj
