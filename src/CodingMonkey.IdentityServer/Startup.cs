@@ -49,6 +49,10 @@
             //TODO: Add certficate for HTTPS!
             var builder = services.AddIdentityServer(options =>
             {
+                if(env.IsProduction())
+                {
+                    options.PublicOrigin = this.Configuration["PRODUCTION_ORIGIN"];
+                }
             });
             
             builder.AddInMemoryClients(Clients.Get(this.env.ContentRootPath, this.Configuration));
