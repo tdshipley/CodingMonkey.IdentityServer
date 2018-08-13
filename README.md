@@ -1,4 +1,7 @@
 # CodingMonkey.IdentityServer
+
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/0fe04296a86147b0b3ba2be582e4351e)](https://www.codacy.com/app/thomas.shipley/CodingMonkey.IdentityServer?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=tdshipley/CodingMonkey.IdentityServer&amp;utm_campaign=Badge_Grade)
+
 An instance of [IdentityServer4](https://github.com/IdentityServer/IdentityServer4) for CodingMonkey
 
 ## Required Secrets File
